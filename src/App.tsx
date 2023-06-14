@@ -1,6 +1,6 @@
 import {
-  createBrowserRouter,
-  RouterProvider,
+  Route,
+  Routes,
 } from "react-router-dom";
 import './App.css';
 import Login from "./pages/auth/Login";
@@ -11,39 +11,19 @@ import Add from "./pages/category/Add";
 import { Provider } from "./Provider";
 import PublicLayout from "./layouts/PublicLayout";
 
-const router = createBrowserRouter([
-
-  {
-    element: <PublicLayout />,
-    children: [
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "register",
-        element: <Register />,
-      },
-      {
-        path: "/",
-        element: <List />,
-      },
-      {
-        path: "/add",
-        element: <Add />,
-      },
-      {
-        path: "/edit/:id",
-        element: <Edit />,
-      },
-    ],
-  },
-]);
 
 function App() {
   return (
     <Provider>
-      <RouterProvider router={router} />
+      <Routes>
+        <Route element={<PublicLayout />}>
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="/" element={<List />} />
+          <Route path="/add" element={<Add />} />
+          <Route path="/edit/:id" element={<Edit />} />
+        </Route>
+      </Routes>
     </Provider>
   );
 }
