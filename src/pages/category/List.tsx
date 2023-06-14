@@ -1,29 +1,39 @@
 import { Table, TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Container, Typography, Button, TableFooter, TablePagination } from '@mui/material';
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+interface Category {
+    id: string;
+    name: string;
+    is_active: boolean;
+}
 
 const List = () => {
     const navigate = useNavigate();
-    const rows = [
-        {
-            id: 1,
-            name: 'Example Category 1',
-            is_active: true
-        },
-        {
-            id: 2,
-            name: 'Example Category 2',
-            is_active: true
-        },
-        {
-            id: 3,
-            name: 'Example Category 3',
-            is_active: true
-        }
-    ]
+    const [rows, setRows] = useState<Category[]>([])
 
-    const handleEdit = (id: number) => () => {
+    const handleEdit = (id: string) => () => {
         navigate(`/edit/${id}`);
     }
+
+    const token = window.localStorage.getItem('token')
+
+    const fetchList = async () => {
+        const response = await axios.get('https://mock-api.arikmpt.com/api/category' , {
+            headers: {
+                'Authorization' : `Bearer ${token}`
+            }
+        })
+        setRows(response.data.data)
+    }
+
+    useEffect(
+        () => {
+            fetchList()
+        },
+        []
+    )
 
     return (
         <div className='content'>
@@ -60,7 +70,7 @@ const List = () => {
                                     ))
                                 }
                             </TableBody>
-                            <TableFooter>
+                            {/* <TableFooter>
                                 <TableRow>
                                     <TablePagination
                                         rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
@@ -78,7 +88,7 @@ const List = () => {
                                         onRowsPerPageChange={() => console.log('handle row change')}
                                     />
                                 </TableRow>
-                                </TableFooter>
+                            </TableFooter> */}
                         </Table>
                     </TableContainer>
                 </div>
