@@ -35,6 +35,20 @@ const List = () => {
         []
     )
 
+    const handleDelete = (id: string) => async () => {
+        try {
+            await axios.delete(`https://mock-api.arikmpt.com/api/category/${id}`, {
+                headers: {
+                    'Authorization' : `Bearer ${token}`
+                }
+            })
+
+            fetchList()
+        } catch (error) {
+            
+        }
+    }
+
     return (
         <div className='content'>
             <Container maxWidth="md">
@@ -63,7 +77,7 @@ const List = () => {
                                             <TableCell align="center">
                                                 <div className="action-group">
                                                     <Button size="small" variant="contained" onClick={handleEdit(row.id)}>Edit</Button>
-                                                    <Button size="small" variant="outlined" color="error">Hapus</Button>
+                                                    <Button size="small" variant="outlined" color="error" onClick={handleDelete(row.id)}>Hapus</Button>
                                                 </div>
                                             </TableCell>
                                         </TableRow>
