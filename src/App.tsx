@@ -8,6 +8,8 @@ import Register from "./pages/auth/Register";
 import List from "./pages/category/List";
 import Edit from "./pages/category/Edit";
 import Add from "./pages/category/Add";
+import { Provider } from "./Provider";
+import PublicLayout from "./layouts/PublicLayout";
 
 const router = createBrowserRouter([
   {
@@ -23,18 +25,25 @@ const router = createBrowserRouter([
     element: <Edit />,
   },
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
+    element: <PublicLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
   },
 ]);
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <Provider>
+      <RouterProvider router={router} />
+    </Provider>
   );
 }
 
