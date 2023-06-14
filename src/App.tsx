@@ -12,18 +12,7 @@ import { Provider } from "./Provider";
 import PublicLayout from "./layouts/PublicLayout";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <List />,
-  },
-  {
-    path: "/add",
-    element: <Add />,
-  },
-  {
-    path: "/edit/:id",
-    element: <Edit />,
-  },
+
   {
     element: <PublicLayout />,
     children: [
@@ -34,6 +23,18 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+      {
+        path: "/",
+        element: <List />,
+      },
+      {
+        path: "/add",
+        element: <Add />,
+      },
+      {
+        path: "/edit/:id",
+        element: <Edit />,
       },
     ],
   },
