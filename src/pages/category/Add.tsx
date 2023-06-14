@@ -1,5 +1,4 @@
-import { Button, Card, CardContent, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material"
-import { useState } from "react";
+import { Button, Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { Link, useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -22,8 +21,6 @@ const schema = yup
 
 const Add = () => {
     const navigate = useNavigate();
-    const [status, setStatus] = useState('1');
-
     const context = useContext<ContextType>(AppContext)
     const setOpen = context?.setOpen
     const setMessage = context?.setMessage
@@ -65,10 +62,6 @@ const Add = () => {
         }
         
     }
-
-    const handleChange = (event: SelectChangeEvent) => {
-        setStatus(event.target.value as string);
-    };
     
     return (
         <div className="login-box">
